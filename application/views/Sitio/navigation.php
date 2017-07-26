@@ -15,7 +15,7 @@
 						<?php endforeach; ?>
 					<?php endif; ?>
 					<li class="nav-item active">
-						<a class="nav-link" target="_blank" href="<?php echo site_url('Main_control/show'); ?>">LOGIN<span class="sr-only">(current)</span></a>
+						<a class="nav-link" target="_blank" href="<?php echo site_url('Auth/login'); ?>">LOGIN<span class="sr-only">(current)</span></a>
 					</li>
 				</ul>
 			</div>

@@ -5,12 +5,14 @@ class Main_control extends MY_Controller {
 
 	function __construct(){
 		parent::__construct();
-
+		$this->load->model("Menus_model", "m_md");
 	}
 
-	public function show(){
-		$data["menu"] = 'Principal';
-		$this->estructura("Admin/login", $data);
+	public function showMenu(){
+		$data["menu"] = $this->m_md->get();
+		$this->load->view("Admin/welcome", $data, FALSE);
+
+		//$this->estructura("Admin/welcome", $data);
 	}
 
 }

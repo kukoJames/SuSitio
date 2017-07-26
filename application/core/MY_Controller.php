@@ -3,8 +3,8 @@
 class MY_Controller extends CI_Controller {
 
 	protected $header = ""; //Archivo header
-	protected $menu = ""; //Menú principal
-	protected $notificatios = ""; //Header de notificaciones
+	protected $menu_notificatios = ""; //Menú notificaciones
+	protected $menu_left = ""; //Menú izquierdo
 	protected $opciones = "";
 	protected $folder = ""; //Contenedor de las vistas del menú
 	protected $footer = ""; //Archivo footer
@@ -14,10 +14,14 @@ class MY_Controller extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
+		$this->load->model("Menus_model", "m_md");
+
+		$data["menu"] = $this->m_md->get();
+
 		$this->header = "Structure/header";
-		// $this->notificatios = "Structure/notificatios";
+		$this->menu_notificatios  = "Structure/notifications_menu";
+		$this->menu_left  = "Structure/left_menu";
 		$this->footer = "Structure/footer";
-		// $this->menu  = "Structure/main_menu";
 		$this->folder = "Structure";
 		$data = new stdClass();
 		// $data->the_user = $this->ion_auth->user()->row();
@@ -31,8 +35,8 @@ class MY_Controller extends CI_Controller {
 
 	protected function estructura($view, $data = NULL) {
 		$this->load->view($this->header, $data);
-		// $this->load->view($this->menu, $data);
-		// $this->load->view($this->notifications, $data);
+		$this->load->view($this->menu_notificatios, $data);
+		$this->load->view($this->menu_left, $data);
 		$this->load->view($view, $data);
 		$this->load->view($this->footer, $data);
 	}
