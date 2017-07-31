@@ -12,6 +12,11 @@
 	<link href="<?php echo base_url('/assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="<?php echo base_url('/assets/css/shop-homepage.css'); ?>" rel="stylesheet">
+	<!-- Toastr script -->
+	<script src="<?php echo base_url('/assets/js/plugins/toastr/toastr.min.js');?>"></script>
+	<!-- Toastr style -->
+	<link href="<?php echo base_url('/assets/css/plugins/toastr/toastr.min.css');?>" rel="stylesheet">
+
 	<!-- Temporary navbar container fix -->
 	<style>
 	.navbar-toggler {

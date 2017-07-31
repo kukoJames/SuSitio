@@ -6,13 +6,16 @@ class Main_control extends MY_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model("Menus_model", "m_md");
+		$this->load->model("Productos_model", "pr_md");
+
 	}
 
 	public function showMenu(){
-		$data["menu"] = $this->m_md->get();
-		$this->load->view("Admin/welcome", $data, FALSE);
+		$data["productos"] = $this->pr_md->getProductos();
+		//$data["menu"] = $this->m_md->menuLeve1();
 
-		//$this->estructura("Admin/welcome", $data);
+		//$this->load->view("Admin/welcome", $data, FALSE);
+		$this->estructura("Admin/welcome", $data);
 	}
 
 }

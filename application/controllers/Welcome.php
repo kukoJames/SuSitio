@@ -7,6 +7,7 @@ class Welcome extends MY_Controller {
 		parent::__construct();
 		$this->load->model("Categorias_model", "cat_md");
 		$this->load->model("Opciones_model", "opc_md");
+		$this->load->model("Productos_model", "pr_md");
 
 	}
 
@@ -29,11 +30,28 @@ class Welcome extends MY_Controller {
 	public function index(){
 		$data["categorias"] = $this->cat_md->get();
 		$data["opciones"] = $this->opc_md->get();
+		$data["productos"] = $this->pr_md->getProductos();
 
-		$this->load->view("Sitio/header", $data);
-		$this->load->view("Sitio/navigation", $data);
-		$this->load->view("Sitio/container", $data);
-		$this->load->view("Sitio/footer", $data);
+		$this->_loadStructure("Sitio", "container", $data);
 		//$this->load->view('welcome_message');
 	}
+
+	public function showDetalle($id){
+		$data["categorias"] = $this->cat_md->get();
+		$data["opciones"] = $this->opc_md->get();
+		$data["producto"] = $this->pr_md->getProductos(['id_producto'=>$id])[0];
+		echo "<pre>";
+		print_r ($data["producto"]);
+		echo "</pre>";
+		$this->_loadStructure("Sitio","detalle_producto", $data);
+	}
+
+	private function _loadStructure($folder, $view, $data=NULL){
+		$this->load->view("Sitio/header", $data);
+		$this->load->view("Sitio/navigation", $data);
+		$this->load->view($folder.'/'.$view, $data);
+		$this->load->view("Sitio/footer", $data);
+	}
+
+
 }
