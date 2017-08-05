@@ -27,11 +27,19 @@ class Welcome extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index(){
+	public function index($val=0){
+		$data["section"] = 'detalle';
+		$data['title'] = "Inicio";
+		$data['header'] = true;
 		$data["categorias"] = $this->cat_md->get();
 		$data["opciones"] = $this->opc_md->get();
-		$data["productos"] = $this->pr_md->getProductos();
+		if ($val > 0) {
+			$data["producto"] = $this->pr_md->getProductos(['id_producto'=>$val])[0];
 
+		}else{
+
+			$data["productos"] = $this->pr_md->getProductos();
+		}
 		$this->_loadStructure("Sitio", "container", $data);
 		//$this->load->view('welcome_message');
 	}
@@ -40,9 +48,7 @@ class Welcome extends MY_Controller {
 		$data["categorias"] = $this->cat_md->get();
 		$data["opciones"] = $this->opc_md->get();
 		$data["producto"] = $this->pr_md->getProductos(['id_producto'=>$id])[0];
-		echo "<pre>";
-		print_r ($data["producto"]);
-		echo "</pre>";
+
 		$this->_loadStructure("Sitio","detalle_producto", $data);
 	}
 

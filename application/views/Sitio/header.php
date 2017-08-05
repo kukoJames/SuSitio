@@ -17,6 +17,8 @@
 	<!-- Toastr style -->
 	<link href="<?php echo base_url('/assets/css/plugins/toastr/toastr.min.css');?>" rel="stylesheet">
 
+	<script src="<?php echo base_url("/assets/vendor/jquery/jquery-2.1.1.js");?>"></script>
+
 	<!-- Temporary navbar container fix -->
 	<style>
 	.navbar-toggler {
