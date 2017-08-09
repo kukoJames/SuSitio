@@ -21,20 +21,26 @@
 
 				<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
 					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+						<?php if ($productos):foreach($productos as $key => $value): ?>
+							<?php if ($key == 0): ?>
+								<li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $key ?>" class="active"></li>
+							<?php else: ?>
+								<li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $key ?>"></li>
+							<?php endif ?>
+						<?php endforeach; endif ?>
 					</ol>
-					<div class="carousel-inner" role="listbox">
-						<div class="carousel-item active">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-						</div>
-						<div class="carousel-item">
-							<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-						</div>
+					<div class="carousel-inner" role="listbox" style="width: 300px;height: 200px">
+						<?php if ($productos):foreach($productos as $key => $value): ?>
+							<?php if ($key == 0): ?>
+								<div class="carousel-item active">
+									<img class="card-img-top img-fluid" width="" height="" src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="">
+								</div>
+							<?php else: ?>
+								<div class="carousel-item">
+									<img class="card-img-top img-fluid" width="" height="" src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="">
+								</div>
+							<?php endif ?>
+						<?php endforeach; endif ?>
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
