@@ -24,8 +24,8 @@ class MY_Controller extends CI_Controller {
 
 		$this->load->vars($data);
    		$this->header = "Structure/header";
-		$this->notifications_menu  = "Structure/notifications_menu";
 		$this->left_menu  = "Structure/left_menu";
+		$this->notifications_menu  = "Structure/notifications_menu";
 		$this->footer = "Structure/footer";
 		$this->folder = "Structure";
 
@@ -33,8 +33,8 @@ class MY_Controller extends CI_Controller {
 
 	public function estructura($view, $data = NULL) {
 		$this->load->view($this->header, $data);
-		$this->load->view($this->notifications_menu, $data);
 		$this->load->view($this->left_menu, $data);
+		$this->load->view($this->notifications_menu, $data);
 		$this->load->view($view, $data);
 		$this->load->view($this->footer, $data);
 	}

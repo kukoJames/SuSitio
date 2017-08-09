@@ -1,35 +1,26 @@
-	<?php $user = $this->ion_auth->user()->row(); ?>
-
-		<div class="page charts-page">
-			<!-- Main Navbar-->
-			<header class="header">
-				<nav class="navbar">
-					<!-- Search Box-->
-					<div class="search-box">
-						<button class="dismiss"><i class="icon-close"></i></button>
-						<form id="searchForm" action="#" role="search">
-							<input type="search" placeholder="Buscar" class="form-control">
-						</form>
-					</div>
-					<div class="container-fluid">
-						<div class="navbar-holder d-flex align-items-center justify-content-between">
-							<!-- Navbar Header-->
-							<div class="navbar-header">
-								<!-- Navbar Brand --><a href="#" class="navbar-brand">
-									<div class="brand-text brand-big hidden-lg-down"><span>Bootstrap </span><strong>Dashboard</strong></div>
-									<div class="brand-text brand-small"><strong>BD</strong></div></a>
-								<!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
-							</div>
-							<!-- Navbar Menu -->
-							<ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-								<!-- Logout    -->
-								<li class="nav-item"> BIENVENIDO : <?php echo strtoupper($user->username) ?>
-								</li>
-								<li class="nav-item">
-									<a href="<?php echo site_url('Auth/logout')?>" class="nav-link logout">Salir<i class="fa fa-sign-out"></i></a>
-								</li>
-							</ul>
+	<div id="page-wrapper" class="gray-bg dashbard-1">
+		<div class="row border-bottom">
+			<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+				<div class="navbar-header">
+					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+					<!--
+					<form role="search" class="navbar-form-custom" method="post" action="">
+						<div class="form-group">
+							<input type="text" placeholder="Buscar" class="form-control" name="top-search" id="top-search">
 						</div>
-					</div>
-				</nav>
-			</header>
+					</form>
+					-->
+				</div>
+
+				<ul class="nav navbar-top-links navbar-right">
+					<li>
+						<span class="m-r-sm text-muted welcome-message">Bienvenido</span>
+					</li>
+					<li>
+						<a href="<?php echo site_url('#') ?>">
+							<i class="fa fa-sign-out"></i> Salir
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>

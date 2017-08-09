@@ -1,49 +1,48 @@
 	<?php $user = $this->ion_auth->user()->row(); ?>
+	<div id="wrapper">
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="nav-header">
+						<div class="dropdown profile-element"> <span>
+							<img alt="image" style="height: 170px; width: 150px;" class="img-circle" src="<?php echo base_url('/assets/img/avatar-5.jpg') ?>" />
+							 </span>
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo $user->username ?></strong>
+							 </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+							<ul class="dropdown-menu animated fadeInRight m-t-xs">
+								<li><a href="#">Profile</a></li>
+								<li><a href="#">Contacts</a></li>
+								<li><a href="#">Mailbox</a></li>
+								<li class="divider"></li>
+								<li><a href="<?php echo site_url('#') ?>">Logout</a></li>
+							</ul>
+						</div>
+						<div class="logo-element">
+							IN+
+						</div>
+					</li>
 
-		<div class="page-content d-flex align-items-stretch">
-			<!-- Side Navbar -->
-			<nav class="side-navbar">
-				<!-- Sidebar Header-->
-				<div class="sidebar-header d-flex align-items-center">
-					<div class="avatar">
-						<img src="<?php echo base_url("/assets/img/avatar-5.JPG") ?>" alt="..." class="img-fluid rounded-circle">
-					</div>
-					<div class="title">
-						<h1 class="h4"><?php echo strtoupper($user->first_name) ?></h1>
-						<p>Web Designer</p>
-					</div>
-				</div>
-				<!-- Sidebar Navidation Menus-->
-				<ul class="list-unstyled">
 					<?php if ($menu_left): ?>
 						<?php foreach ($menu_left as $key => $value): ?>
 							<?php if ($value->nivel == 1): ?>
-                                <li>
-                                <?php if ($value->ruta != ''): ?>
-                                	<a href="<?php echo site_url($value->ruta); ?>">
-                                    	<i class="<?php echo $value->icono ?>"></i>
-                                    	<span class="nav-label"><?php echo strtoupper($value->nombre) ?></span>
-                                	</a>
-                                <?php else: ?>
-                                	<a href="#">
-                                    	<i class="<?php echo $value->icono ?>"></i>
-                                    	<span class="nav-label"><?php echo strtoupper($value->nombre) ?></span>
-                                    	<span class="fa arrow"></span>
-                                	</a>
-                                <?php endif ?>
-                                </li>
-                            <?php endif ?>
-                        <?php endforeach ?>
+								<li class="active">
+								<?php if ($value->ruta != ''): ?>
+									<a href="<?php echo site_url($value->ruta); ?>">
+										<i class="<?php echo $value->icono ?>"></i>
+										<span class="nav-label"><?php echo strtoupper($value->nombre) ?></span>
+									</a>
+								<?php else: ?>
+									<a href="#">
+										<i class="<?php echo $value->icono ?>"></i>
+										<span class="nav-label"><?php echo strtoupper($value->nombre) ?></span>
+										<span class="fa arrow"></span>
+									</a>
+								<?php endif ?>
+								</li>
+							<?php endif ?>
+						<?php endforeach ?>
 					<?php endif ?>
 				</ul>
-			</nav>
-			<div class="content-inner">
-				<!-- Page Header-->
-				<header class="page-header">
-					<div class="container-fluid">
-						<h2 class="no-margin-bottom">Submenu</h2>
-					</div>
-				</header>
-
-
-
+			</div>
+		</nav>
