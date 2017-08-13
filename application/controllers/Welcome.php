@@ -27,29 +27,19 @@ class Welcome extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index($val=0){
+	public function index(){
 		$data["section"] = 'detalle';
 		$data['title'] = "Inicio";
 		$data['header'] = true;
 		$data["categorias"] = $this->cat_md->get();
 		$data["opciones"] = $this->opc_md->get();
-		if ($val > 0) {
-			$data["producto"] = $this->pr_md->getProductos(['id_producto'=>$val])[0];
-
-		}else{
-
-			$data["productos"] = $this->pr_md->getProductos();
-		}
+		$data["productos"] = $this->pr_md->getProductos();
 		$this->_loadStructure("Sitio", "container", $data);
-		//$this->load->view('welcome_message');
 	}
 
 	public function showDetalle($id){
-		$data["categorias"] = $this->cat_md->get();
-		$data["opciones"] = $this->opc_md->get();
 		$data["producto"] = $this->pr_md->getProductos(['id_producto'=>$id])[0];
-
-		$this->_loadStructure("Sitio","detalle_producto", $data);
+		$this->load->view("Sitio/detalle_producto", $data, FALSE);
 	}
 
 	private function _loadStructure($folder, $view, $data=NULL){

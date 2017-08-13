@@ -10,7 +10,7 @@
 					<?php if ($opciones): ?>
 						<?php foreach ($opciones as $key => $value): ?>
 							<li class="nav-item active">
-								<a class="nav-link" href="#"><?php echo strtoupper ($value->nombre) ?><span class="sr-only">(current)</span></a>
+								<a class="nav-link" href="<?php echo site_url($value->url) ?>"><?php echo strtoupper ($value->nombre) ?><span class="sr-only">(current)</span></a>
 							</li>
 						<?php endforeach; ?>
 					<?php endif; ?>
