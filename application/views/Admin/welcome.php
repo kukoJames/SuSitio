@@ -38,8 +38,8 @@
 											<td><?php echo '' ?></td>
 											<td>
 												<a data-toggle="modal" data-tooltip="tooltip" title="Editar"  class="btn tool btn-info btn-modal" href="<?php echo site_url('Main_control/updateProducto/'.$value->id_producto);?>" data-target="#myModal" ><i class="fa fa-pencil"></i></a>
-												<hr>
-	                                            <a data-toggle="modal" data-tooltip="tooltip" title="Eliminar"  class="btn tool btn-warning btn-modal" href="<?php echo site_url('Main_control/deleteProducto/'.$value->id_producto);?>" data-target="#myModal" ><i class="fa fa-trash"></i></a>
+												<a data-toggle="modal" data-tooltip="tooltip" title="Cargar imagen"  class="btn tool btn-primary btn-modal" href="<?php echo site_url('Main_control/addFoto/'.$value->id_producto);?>" data-target="#myModal" ><i class="fa fa-image"></i></a>
+												<a data-toggle="modal" data-tooltip="tooltip" title="Eliminar"  class="btn tool btn-warning btn-modal" href="<?php echo site_url('Main_control/deleteProducto/'.$value->id_producto);?>" data-target="#myModal" ><i class="fa fa-trash"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>

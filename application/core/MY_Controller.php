@@ -44,5 +44,16 @@ class MY_Controller extends CI_Controller {
 		echo json_encode( $response );
 	}
 
+    public function createFolder($folder){
+    	$base = $this->ASSETS.$this->UPLOADS;
+    	$ruta = $this->ASSETS.$this->UPLOADS.$folder."/";
+    	if(!is_dir($ruta)){
+        	mkdir($this->ASSETS, 0777);
+        	mkdir($base, 0777);
+           	mkdir($ruta, 0777);
+        }
+        return $ruta;
+    }
+
 
 }

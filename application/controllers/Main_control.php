@@ -78,6 +78,49 @@ class Main_control extends MY_Controller {
 		$this->jsonResponse($mensaje);
 	}
 
+	public function addFoto($id){
+		$data["title"]="Cargar imagen";
+		$this->load->view("Structure/header_modal", $data);
+		$data["producto"] = $this->pr_md->get(['id_producto'=>$id])[0];
+		$this->load->view("Admin/addFoto", $data);
+		$this->load->view("Structure/footer_modal_close");
+	}
+
+	public function uploadFoto(){
+		echo "<pre>";
+		print_r ($_FILES);
+		echo "</pre>";
+		$this->load->library("upload");
+   		$this->load->helper("path");
+   		$id_producto = $this->input->post('id_producto');
+		$ruta_foto = $this->createFolder("Terrenos"); //Se crea el folder si no existe
+
+		$explode = explode(".", $_FILES['file']['name']);
+		$extension = array_pop($explode);
+
+		$logo["file_name"] = 'logo_'.$id_producto;
+        $logo["upload_path"] = FCPATH.$ruta_foto;
+        $logo["allowed_types"] = 'jpg|jpeg|gif|png|';
+        $logo["overwrite"] = TRUE;
+        $logo["remove_spaces"] = TRUE;
+
+        $this->upload->initialize($logo);
+        if (! $this->upload->do_upload('file')){
+            $data["id"]= "Error";
+        	$data['desc'] = $this->upload->display_errors();
+            $data["type"] = "error";
+        }else{
+            $data["resultado"] = $this->upload->data();
+            $data["id"]= "Éxito";
+            $data["desc"] = "Foto cargada correctamente";
+            $data["type"] = "success";
+            $update = array(
+                "ruta_imagen" => $ruta_foto,
+                "nombre_imagen" => $logo["file_name"].".".$extension);
+            $this->pr_md->update($update, $id_producto);
+        }
+        $this->responseJson($data);
+	}
 
 }
 

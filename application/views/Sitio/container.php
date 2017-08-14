@@ -108,7 +108,6 @@
 		$(".show_information").click(function (event) {
 			event.preventDefault();
 			$.get("Welcome/showDetalle/"+$(this).data('id_producto'), function(resp) {
-
 				$("#main_container").hide();
 				$("#detail_container").show();
 				$("#detail_container").html(resp);
