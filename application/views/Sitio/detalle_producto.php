@@ -39,51 +39,49 @@
 
 <style type="text/css">
 	#map{
-		width: 880px;
+		width: 100%;
 		height: 400px;
 	}
 </style>
 
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		if(navigator.geolocation){
-			var option = {
-				enableHighAccurancy : true,
-				//timeout : infinty,
-				timeout : 60,
-				maximumAge : 0
-			};
+ <script>
+      
+function initMap(){
 
-			var watchID = navigator.geolocation.watchPosition(success, failure, option);
-		}else{
-			toastr.warning("No soporta los mapas", "Alerta");
-		}
+const mylatlng ={lat: -25.363, lng: 131.044};;
+var texto='<h1>Hola mundo</h1>'+'<p>Master cracks</p>'+'<a href="#">pagina web</a>';
+const options={
+	center:mylatlng,
+	zoom:4
+} 
+
+
+var map = document.getElementById('map');
+const mapa =new google.maps.Map(map, options);
+
+	const marcador = new google.maps.Marker({
+	position: mylatlng,
+	map:mapa,
+	title:"mi marcador"
 	});
-	// x = navigator.geolocation;
-	// x.getCurrentPosition(success, failure);
 
-	function success(position) {
-		var my_latitude = position.coords.latitude;
-		var my_longitude = position.coords.longitude;
-		// $("#latitude").html(my_latitude);
-		// $("#longitude").html(my_longitude);
+	var info = new google.maps.InfoWindow({
+	
+	content:texto
+	
+	});
 
-		var coords = new google.maps.LatLng(my_latitude, my_longitude);
-
-		var mapOptions = {
-			zoom		:	30,
-			center		:	coords,
-			MapTypeId	:	google.maps.MapTypeId.ROADMAP
-		}
-
-		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-		var marker = new google.maps.Marker({map:map, position: coords});
-
-	}
-
-	function failure(position){
-		console.log("No encontro latitud ni longitud");
-	}
+	
+	marcador.addListener('click', function() {
+   info.open(mapa,marcador);
+  	});
+ 
+}
 
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoV1bFOgIhMTNzhQLLhaXuaOcuLHF7XEU&callback=initMap"></script>
+
+
+
+
