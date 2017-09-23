@@ -82,44 +82,49 @@ class Main_control extends MY_Controller {
 		$data["title"]="Cargar imagen";
 		$this->load->view("Structure/header_modal", $data);
 		$data["producto"] = $this->pr_md->get(['id_producto'=>$id])[0];
+		$data['categoria'] = $this->cat_md->get(['id_categoria' => $data["producto"]->id_categoria])[0];
 		$this->load->view("Admin/addFoto", $data);
 		$this->load->view("Structure/footer_modal_close");
 	}
 
 	public function uploadFoto(){
-		echo "<pre>";
-		print_r ($_FILES);
-		echo "</pre>";
 		$this->load->library("upload");
    		$this->load->helper("path");
    		$id_producto = $this->input->post('id_producto');
-		$ruta_foto = $this->createFolder("Terrenos"); //Se crea el folder si no existe
+   		$id_categoria = $this->input->post('id_categoria');
+   		$categoria = $this->input->post('categoria');
 
+		$ruta_folder = $this->createFolder($categoria); //Se crea el folder si no existe
+		
 		$explode = explode(".", $_FILES['file']['name']);
 		$extension = array_pop($explode);
+		
+		$imagen = [
+			"file_name"		=>	$id_producto.'_'.$explode[0],
+			"upload_path"	=>	FCPATH.$ruta_folder,
+			"allowed_types"	=>	'jpg|jpeg|gif|png|',
+			"overwrite"		=>	TRUE,
+			"remove_spaces"	=>	TRUE
+		];
 
-		$logo["file_name"] = 'logo_'.$id_producto;
-        $logo["upload_path"] = FCPATH.$ruta_foto;
-        $logo["allowed_types"] = 'jpg|jpeg|gif|png|';
-        $logo["overwrite"] = TRUE;
-        $logo["remove_spaces"] = TRUE;
-
-        $this->upload->initialize($logo);
-        if (! $this->upload->do_upload('file')){
-            $data["id"]= "Error";
-        	$data['desc'] = $this->upload->display_errors();
-            $data["type"] = "error";
+		$this->upload->initialize($imagen);
+		
+		if (! $this->upload->do_upload('file')){
+			$data = ["id"	=>	"Error",
+        			"desc"	=>	$this->upload->display_errors(),
+        			"type"	=>	"error"];
         }else{
             $data["resultado"] = $this->upload->data();
-            $data["id"]= "Éxito";
-            $data["desc"] = "Foto cargada correctamente";
-            $data["type"] = "success";
-            $update = array(
-                "ruta_imagen" => $ruta_foto,
-                "nombre_imagen" => $logo["file_name"].".".$extension);
+            $data =["id" => "Éxito",
+            		"desc"	=>	"Foto cargada correctamente",
+            		"type"	=>	"success"];
+            $update = [
+            	"ruta_imagen" => $ruta_folder,
+                "nombre_imagen" => $imagen["file_name"].".".$extension];
+
             $this->pr_md->update($update, $id_producto);
         }
-        $this->responseJson($data);
+        $this->jsonResponse($data);
 	}
 
 }
