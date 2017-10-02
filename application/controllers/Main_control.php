@@ -74,6 +74,7 @@ class Main_control extends MY_Controller {
 					"desc"	=> 'Producto eliminado correctamente',
 					"type"	=> 'success'
 				);
+				break;
 		}
 		$this->jsonResponse($mensaje);
 	}

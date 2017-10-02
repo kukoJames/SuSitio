@@ -1,4 +1,4 @@
-	<?php $user = $this->ion_auth->user()->row(); ?>
+	<?php $user = $this->ion_auth->user()->row() ?>
 	<div id="wrapper">
 		<nav class="navbar-default navbar-static-side" role="navigation">
 			<div class="sidebar-collapse">
@@ -8,14 +8,13 @@
 							<img alt="image" style="height: 170px; width: 150px;" class="img-circle" src="<?php echo base_url('/assets/img/avatar-5.jpg') ?>" />
 							 </span>
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo $user->username ?></strong>
-							 </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+							<span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><?php echo strtoupper($user->username) ?></strong>
+							 </span> <span class="text-muted text-xs block"><?php echo strtoupper($user->company) ?> <b class="caret"></b></span> </span> </a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-								<li><a href="#">Profile</a></li>
-								<li><a href="#">Contacts</a></li>
-								<li><a href="#">Mailbox</a></li>
+								<li><a href="#"><?php echo $user->email ?></a></li>
+								<li><a href="#"><?php echo $user->phone ?></a></li>
 								<li class="divider"></li>
-								<li><a href="<?php echo site_url('#') ?>">Logout</a></li>
+								<li><a href="<?php echo site_url('Auth/logout') ?>">Salir</a></li>
 							</ul>
 						</div>
 						<div class="logo-element">
