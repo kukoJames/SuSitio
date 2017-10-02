@@ -7,6 +7,7 @@ class MY_Controller extends CI_Controller {
 	protected $left_menu = ""; //Menú izquierdo
 	protected $folder = ""; //Contenedor de las vistas del menú
 	protected $footer = ""; //Archivo footer
+	protected $main = ""; //Archivo principal
 	protected $USER;
 	protected $ASSETS;
    	protected $UPLOADS;
@@ -27,6 +28,7 @@ class MY_Controller extends CI_Controller {
 		$this->left_menu  = "Structure/left_menu";
 		$this->notifications_menu  = "Structure/notifications_menu";
 		$this->footer = "Structure/footer";
+		$this->main = "Structure/main";
 		$this->folder = "Structure";
 
 	}
@@ -37,6 +39,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->view($this->notifications_menu, $data);
 		$this->load->view($view, $data);
 		$this->load->view($this->footer, $data);
+		$this->load->view($this->main, $data);
 	}
 
 	public function jsonResponse( $response ) {
