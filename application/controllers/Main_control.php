@@ -10,6 +10,10 @@ class Main_control extends MY_Controller {
 		$this->load->model("Categorias_model", "cat_md");
 	}
 
+	public function scripts() {
+		$this->load->view("structure/main");
+	}
+
 	public function showMenu(){
 		$data["productos"] = $this->pr_md->getProductos();
 		//$data["menu"] = $this->m_md->menuLeve1();
@@ -31,7 +35,7 @@ class Main_control extends MY_Controller {
 		$data["producto"] = $this->pr_md->get(['id_producto'=>$id])[0];
 		$data['categorias'] = $this->cat_md->get();
 		$this->load->view("Admin/edit_producto", $data);
-		$this->load->view("Structure/footer_modal_save");
+		$this->load->view("Structure/footer_modal_edit");
 	}
 
 	public function deleteProducto($id){
@@ -39,7 +43,7 @@ class Main_control extends MY_Controller {
 		$this->load->view("Structure/header_modal", $data);
 		$data["producto"] = $this->pr_md->get(['id_producto'=>$id])[0];
 		$this->load->view("Admin/delete_producto", $data);
-		$this->load->view("Structure/footer_modal_save");
+		$this->load->view("Structure/footer_modal_delete");
 	}
 
 	public function accion($param){
@@ -68,7 +72,7 @@ class Main_control extends MY_Controller {
 				break;
 
 			default:
-				$data ['id_producto'] = $this->pr_md->update(["estatus" => 0], $this->input->post('id_alumno'));
+				$data ['id_producto'] = $this->pr_md->update(["estatus" => 1], $this->input->post('id_alumno'));
 				$mensaje = array(
 					"id" 	=> 'Éxito',
 					"desc"	=> 'Producto eliminado correctamente',

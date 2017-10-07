@@ -1,21 +1,30 @@
 <script type="text/javascript">
 
 	$(function() {
-		$(document).on("click", "a", function (event) {
+		var iniciar =1;
+
+		$("#myModal").modal({
+			backdrop: 'static',
+			keyboard: false,
+			show: false
+		});
+
+		function cleanModal() {
+			$("#myModal .modal-header").empty();
+			$("#myModal .modal-body").empty();
+			$("#myModal .modal-footer").empty();
+		}
+
+		$(document).off("click", "btn-modal").on("click", ".btn-modal", function(event){
 			event.preventDefault();
-			var url = this.href;
-			var element = $(this);
-			if(element.hasClass("btn-modal")){
-				console.log("Tienen la modal modal");
-
-			}else if(element.hasClass("close")){
-				console.log("Cierra la modal");
-				$("#myModal").modal("hide");
-				$("#myModal .modal-body").empty();
-
+			iniciar = 2;
+			if(iniciar == 1){
+				iniciar = 2;
 			}else{
-				console.log("Sin clases");
+				cleanModal();
+				$(".modal-content").load(this.href);
 			}
+			$( ".btn-modal").unbind( "click" );
 		});
 
 		function datePicker() {
@@ -25,19 +34,21 @@
 			});
 		}
 
+
 		function sendDatos(url, formData){
 			$.ajax({
 				url: urlbase + url,
 				type: "POST",
 				dataType: "JSON",
-				data: (formData).serialize()
+				data: (formData).serializeArray()
 			})
 			.done(function(response) {
 				switch(response.type){
 					case "success":
+						cleanModal();
 						$("#myModal").modal("hide");
 						toastr.success(response.desc, response.id);
-						location.reload();
+				//		location.reload();
 					break;
 
 					case "info":
@@ -65,7 +76,6 @@
 			.always(function(response) {
 				$("#myModal .modal-content").empty();
 				$("#myModal .modal-body").empty();
-				//trigger: 'focus'
 				console.log("Petición completa");
 			});
 		}

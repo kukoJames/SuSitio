@@ -50,7 +50,7 @@
 			<input type="hidden" name="latitud" id="latitud" value="">
 			<input type="hidden" name="longitud" id="longitud" value="">
 			<div class="col-sm-12">
-				<div id="mapa" style="height: 300px; width: 550px;"> 
+				<div id="show_mapa" style="height: 300px; width: 550px;"> 
 					<!--Para mostrar el Mapa --> 
 				</div>
 			</div>
@@ -65,35 +65,29 @@
 		);
 	});
 
-	jQuery(document).ready(function($) {
-		if(navigator.geolocation){
-			var option = {
-				enableHighAccurancy : true,
-				timeout : Infinity,
-				maximumAge : 0
-			};
-			var ubicacion = navigator.geolocation.watchPosition(success, failure, option);
-		}else{
-			toastr.warning("Su navegador no soporta la geolocalización", "Alerta");
-		}
-		
-		function success(position) {
-			var myLatitude = position.coords.latitude;
-			var myLongitude = position.coords.longitude;
-			$("#latitud").val(myLatitude);
-			$("#longitud").val(myLongitude);
-			var coords = new google.maps.LatLng(myLatitude, myLongitude);
-			var mapOptions = {
-				zoom : 20,
-				center : coords,
-				MapTypeId : google.maps.MapTypeId.ROADMAP
-			}
-			var map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
-			var marker = new google.maps.Marker({map:map, position: coords, title: 'Estas aquí'});
-		}
+	function initMap() {
+		var mapa = new google.maps.Map(document.getElementById('show_mapa'),{
+			center:{
+				lat:19.7006,
+				lng:-101.186
+			},
+			zoom:20
+		});
 
-		function failure(position){
-			toastr.error("Falló al obtener la ubicación  "+position, "Error");
-		}
-	});
+		var marker = new google.maps.Marker({
+			position:{
+				lat:$("#latitud").val(),
+				lng:$("#longitud").val()
+			},
+			map:mapa,
+			draggable:true
+		});
+
+		google.maps.event.addListener(marker, 'dragend', function(){
+			$("#latitud").val(marker.getPosition().lat());
+			$("#longitud").val(marker.getPosition().lng());
+			console.log("Latitud =",marker.getPosition().lat(), "	Longitud =",marker.getPosition().lng());
+		});
+	}
+
 </script>
