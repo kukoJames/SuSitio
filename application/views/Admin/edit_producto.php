@@ -38,7 +38,7 @@
 </div>
 
 <script type="text/javascript">
-	$(".save").click(function () {
+	$(".update").click(function () {
 		sendDatos("Main_control/accion/U/",$("#form_producto_edit")
 		);
 	});
