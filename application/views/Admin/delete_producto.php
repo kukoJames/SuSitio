@@ -14,7 +14,6 @@
 
 <script type="text/javascript">
 	$(".delete").click(function () {
-		sendDatos("Main_control/accion/D",$("#form_producto_delete")
-		);
+		sendDatos("Main_control/accion/D",$("#form_producto_delete"));
 	});
 </script>

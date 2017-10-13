@@ -1,3 +1,9 @@
+<style type="text/css" media="screen">
+	.carousel-img{
+		height: 350px !important;
+		width: 850px !important; 
+	}
+</style>
 	<!-- Page Content -->
 	<div class="container">
 
@@ -33,11 +39,11 @@
 						<?php if ($productos):foreach($productos as $key => $value): ?>
 							<?php if ($key == 0): ?>
 								<div class="carousel-item active">
-									<img class="card-img-top img-fluid" width=850 height=400 src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="">
+									<img class="card-img-top img-fluid carousel-img" src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="">
 								</div>
 							<?php else: ?>
 								<div class="carousel-item">
-									<img class="card-img-top img-fluid" width=850 height=400 src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="">
+									<img class="card-img-top img-fluid carousel-img" src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="">
 								</div>
 							<?php endif ?>
 						<?php endforeach; endif ?>
@@ -69,7 +75,7 @@
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="card h-100">
 									<a class="show_information" href="#" data-id_producto="<?php echo $value->id_producto ?>" >
-										<img class="card-img-top img-fluid" width=400 height=1 src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="Mas información">
+										<img class="card-img-top img-fluid" src="<?php echo base_url("{$value->ruta_imagen}{$value->nombre_imagen}") ?>"  alt="Mas información">
 									</a>
 									<div class="card-block">
 										<h4 class="card-title"><a href="#"><?php echo $value->producto ?></a></h4>
@@ -87,14 +93,7 @@
 				<!-- /.row -->
 
 			</div>
-			<!-- /.col-lg-9 -->
-
-			<div class="col-lg-9" id="detail_container">
-			<br>
-				<!-- Aqui cargaremos el detalle-->
-
-			</div>
-
+			
 		</div>
 		<!-- /.row -->
 
@@ -102,15 +101,11 @@
 	<!-- /.container -->
 
 	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$("#detail_container").hide()
-		});
+		
 		$(".show_information").click(function (event) {
 			event.preventDefault();
 			$.get("Welcome/showDetalle/"+$(this).data('id_producto'), function(resp) {
-				$("#main_container").hide();
-				$("#detail_container").show();
-				$("#detail_container").html(resp);
+				$("#main_container").html(resp);//Le cargamos la respuesta
 			});
 		});
 	</script>

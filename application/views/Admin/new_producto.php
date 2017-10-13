@@ -34,13 +34,13 @@
 						<?php endforeach; endif ?>
 					</select>
 				</div>
-			</div>		
+			</div>
 		</div>
 		
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="curp">Descripción</label>
+					<label for="descripcion">Descripción</label>
 					<textarea name="descripcion" id="descripcion" class="form-control" placeholder="Describa una descripción"></textarea>
 				</div>
 			</div>
@@ -61,8 +61,7 @@
 
 <script type="text/javascript">
 	$(".save").click(function () {
-		sendDatos("Main_control/accion/I/",$("#form_producto_new")
-		);
+		sendDatos("Main_control/accion/I/",$("#form_producto_new"));
 	});
 
 	function initMap() {
@@ -76,11 +75,12 @@
 
 		var marker = new google.maps.Marker({
 			position:{
-				lat:$("#latitud").val(),
-				lng:$("#longitud").val()
+				lat:19.7006,
+				lng:-101.186
 			},
 			map:mapa,
-			draggable:true
+			draggable:true,
+			title:"Estás aqui"
 		});
 
 		google.maps.event.addListener(marker, 'dragend', function(){
