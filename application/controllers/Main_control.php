@@ -51,6 +51,9 @@ class Main_control extends MY_Controller {
 				'nombre'		=>	strtoupper($this->input->post('nombre')),
 				'precio'		=>	$this->input->post('precio'),
 				'descripcion'	=>	$this->input->post('descripcion'),
+				'longitud'		=>	$this->input->post('longitud'),
+				'latitud'		=>	$this->input->post('latitud'),
+				'id_categoria'	=>	($this->input->post('id_categoria') !="-1") ? $this->input->post('id_categoria') : NULL
 			);
 		switch ($param) {
 			case (substr($param, 0, 1) === 'I'):
