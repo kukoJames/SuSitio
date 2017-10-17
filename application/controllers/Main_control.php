@@ -66,7 +66,7 @@ class Main_control extends MY_Controller {
 				break;
 
 			case (substr($param, 0, 1) === 'U'):
-				$data ['id_producto'] = $this->pr_md->update($producto, $this->input->post('id_alumno'));
+				$data ['id_producto'] = $this->pr_md->update($producto, $this->input->post('id_producto'));
 				$mensaje = array(
 					"id" 	=> 'Éxito',
 					"desc"	=> 'Producto actualizado correctamente',
@@ -75,7 +75,7 @@ class Main_control extends MY_Controller {
 				break;
 
 			default:
-				$data ['id_producto'] = $this->pr_md->update(["estatus" => 1], $this->input->post('id_alumno'));
+				$data ['id_producto'] = $this->pr_md->update(["estatus" => 1], $this->input->post('id_producto'));
 				$mensaje = array(
 					"id" 	=> 'Éxito',
 					"desc"	=> 'Producto eliminado correctamente',

@@ -1,10 +1,9 @@
 <style type="text/css" media="screen">
-	.datepicker, #mapa{
+	.datepicker, #show_mapa{
 		z-index: 9999 !important;
 	}
 </style>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6VBEfhHWNZKNUoJbw5YqazrU83u59sbc&callback=initMap"></script>
 
 <div class="ibox-content">
 	<div class="row">
@@ -63,31 +62,15 @@
 	$(".save").click(function () {
 		sendDatos("Main_control/accion/I/",$("#form_producto_new"));
 	});
+	
+	var latitud =  document.getElementById("latitud");
+	var longitud = document.getElementById('longitud');
 
-	function initMap() {
-		var mapa = new google.maps.Map(document.getElementById('show_mapa'),{
-			center:{
-				lat:19.7006,
-				lng:-101.186
-			},
-			zoom:20
-		});
-
-		var marker = new google.maps.Marker({
-			position:{
-				lat:19.7006,
-				lng:-101.186
-			},
-			map:mapa,
-			draggable:true,
-			title:"Estás aqui"
-		});
-
-		google.maps.event.addListener(marker, 'dragend', function(){
-			$("#latitud").val(marker.getPosition().lat());
-			$("#longitud").val(marker.getPosition().lng());
-			console.log("Latitud =",marker.getPosition().lat(), "	Longitud =",marker.getPosition().lng());
-		});
-	}
+	startMap("show_mapa", latitud, longitud);
 
 </script>
+
+<!-- 
+
+https://www.youtube.com/watch?v=3y45G2hEY_Y
+-->

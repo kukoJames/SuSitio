@@ -4,8 +4,6 @@
 	}
 </style>
 
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6VBEfhHWNZKNUoJbw5YqazrU83u59sbc&callback=initMap"></script> -->
-
 <div class="ibox-content">
 	<div class="row">
 		<?php echo form_open("", array("id"=>'form_producto_edit')); ?>
@@ -62,29 +60,9 @@
 		sendDatos("Main_control/accion/U/",$("#form_producto_edit"));
 	});
 
-	function initMap() {
-		var mapa = new google.maps.Map(document.getElementById('show_mapa'),{
-			center:{
-				lat:19.7006,
-				lng:-101.186
-			},
-			zoom:20
-		});
+	var latitud = document.getElementById("latitud");
+	var longitud = document.getElementById('longitud');
 
-		var marker = new google.maps.Marker({
-			position:{
-				lat:19.7006,
-				lng:-101.186
-			},
-			map:mapa,
-			draggable:true,
-			title:"Estás aqui"
-		});
+	startMap("show_mapa", latitud, longitud);
 
-		google.maps.event.addListener(marker, 'dragend', function(){
-			$("#latitud").val(marker.getPosition().lat());
-			$("#longitud").val(marker.getPosition().lng());
-			console.log("Latitud =",marker.getPosition().lat(), "	Longitud =",marker.getPosition().lng());
-		});
-	}
 </script>

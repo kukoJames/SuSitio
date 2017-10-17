@@ -1,3 +1,6 @@
+<!-- Cargamos la API para el Mapa -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6VBEfhHWNZKNUoJbw5YqazrU83u59sbc"></script>
+
 <script type="text/javascript">
 
 	$(function() {
@@ -80,6 +83,33 @@
 			$("#myModal .modal-content").empty();
 			$("#myModal .modal-body").empty();
 			console.log("Petición completa");
+		});
+	}
+
+	//Para cargar el mapa
+	function startMap(selector, latitud, longitud) {
+		var mapa = new google.maps.Map(document.getElementById(selector),{
+			center:{
+				lat:(latitud.value != '') ? parseFloat(latitud.value) : 29.5333,
+				lng:(longitud.value != '') ? parseFloat(longitud.value) :-111.2333
+			},
+			zoom:15
+		});
+
+		var marker = new google.maps.Marker({
+			position:{
+				lat:(latitud.value != '') ? parseFloat(latitud.value) : 29.5333,
+				lng:(longitud.value != '') ? parseFloat(longitud.value) :-111.2333
+			},
+			map:mapa,
+			draggable:true,
+			title:"Estás aqui"
+		});
+
+		google.maps.event.addListener(marker, "dragend", function(){
+			latitud.value = marker.getPosition().lat();
+			longitud.value = marker.getPosition().lng();
+			console.log("Latitud =",marker.getPosition().lat(), "	Longitud =",marker.getPosition().lng());
 		});
 	}
 
