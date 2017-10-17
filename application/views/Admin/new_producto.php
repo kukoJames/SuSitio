@@ -69,8 +69,3 @@
 	startMap("show_mapa", latitud, longitud);
 
 </script>
-
-<!-- 
-
-https://www.youtube.com/watch?v=3y45G2hEY_Y
--->
